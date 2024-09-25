@@ -1,5 +1,5 @@
 
-package com.andre.repositories;
+package com.andre.bookstore.repositories;
 
 import com.andre.bookstore.domain.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,7 +13,6 @@ como segundo argumento ele espera o tipo primitivo do identificador da classe.*/
 
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
-    
-//    
+
     
 }

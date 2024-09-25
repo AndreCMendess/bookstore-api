@@ -1,5 +1,5 @@
 
-package com.andre.repositories;
+package com.andre.bookstore.repositories;
 
 import com.andre.bookstore.domain.Livro;
 import org.springframework.data.jpa.repository.JpaRepository;
