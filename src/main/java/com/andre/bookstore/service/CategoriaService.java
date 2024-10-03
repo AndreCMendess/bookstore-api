@@ -1,6 +1,7 @@
 package com.andre.bookstore.service;
 
 import com.andre.bookstore.domain.Categoria;
+import com.andre.bookstore.dtos.CategoriaDTO;
 import com.andre.bookstore.repositories.CategoriaRepository;
 import com.andre.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class CategoriaService {
     }
 
 
+    public Categoria create(Integer id, CategoriaDTO objDto) {
+        Categoria obj = findById(id);
+        obj.setNome(objDto.getNome());
+        obj.setDescricao(objDto.getDescricao());
+        return repository.save(obj);
 
-
+    }
 }
