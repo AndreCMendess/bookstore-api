@@ -1,4 +1,4 @@
-package com.andre.bookstore.exceptions;
+package com.andre.bookstore.resources.exceptions;
 
 public class StandardError {
 

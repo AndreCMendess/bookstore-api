@@ -1,5 +1,6 @@
-package com.andre.bookstore.exceptions;
+package com.andre.bookstore.resources.exceptions;
 
+import com.andre.bookstore.service.exceptions.ObjectNotFoundException;
 import jakarta.servlet.ServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,4 +16,5 @@ public class ResourceExceptionHandler {
             StandardError error = new StandardError(e.getMessage(), System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+
 }
