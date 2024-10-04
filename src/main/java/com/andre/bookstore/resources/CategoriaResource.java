@@ -57,6 +57,12 @@ public class CategoriaResource {
         return ResponseEntity.ok().body(new CategoriaDTO(newObj));// retorna a reposta http 200 com o corpo da resposta a categoria atualizada
     }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 
