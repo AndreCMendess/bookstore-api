@@ -1,5 +1,6 @@
 package com.andre.bookstore.service;
 
+import com.andre.bookstore.domain.Categoria;
 import com.andre.bookstore.domain.Livro;
 import com.andre.bookstore.repositories.LivroRepository;
 import com.andre.bookstore.service.exceptions.ObjectNotFoundException;
@@ -42,5 +43,13 @@ public class LivroService {
         livro.setTitulo(livroAtualizado.getTitulo());
         livro.setNomeAutor(livroAtualizado.getNomeAutor());
         livro.setTexto(livroAtualizado.getTexto());
+    }
+
+    public Livro create(Integer idCat, Livro livro) {
+        livro.setId(null);
+        Categoria cat = categoriaService.findById(idCat);
+        livro.setCategoria(cat);
+        return livroRepository.save(livro);
+
     }
 }
