@@ -3,6 +3,7 @@ package com.andre.bookstore.service;
 import com.andre.bookstore.domain.Categoria;
 import com.andre.bookstore.dtos.CategoriaDTO;
 import com.andre.bookstore.repositories.CategoriaRepository;
+import com.andre.bookstore.service.exceptions.DataIntegrityViolationException;
 import com.andre.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,8 +54,13 @@ public class CategoriaService {
 
     }
 
-    public void delete(Integer id){
-        this.findById(id);
-        repository.deleteById(id);
+    public void delete(Integer id) {
+            findById(id);
+        try {
+            repository.deleteById(id);
+        }catch(DataIntegrityViolationException ex) {
+           throw new com.andre.bookstore.service.exceptions.DataIntegrityViolationException("Categoria não pode ser deletado , possui livros associados ");
+        }
+
     }
 }
