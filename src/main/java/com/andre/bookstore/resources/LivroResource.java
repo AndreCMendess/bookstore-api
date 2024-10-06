@@ -77,6 +77,12 @@ public class LivroResource {
         return ResponseEntity.created(uri).build();
     }
 
+    @DeleteMapping(value= "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+
+    }
 
 
 }
