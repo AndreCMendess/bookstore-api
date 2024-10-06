@@ -2,6 +2,8 @@
 package com.andre.bookstore.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -19,7 +21,12 @@ public class Categoria implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotEmpty(message = "Campo Nome é requerido")
+    @Length(min = 3 , max = 100 , message = "O campo nome deve ter entre 3 e 100 caracteres")
     private String nome;
+
+    @NotEmpty(message = "Campo Descrição é requerido")
+    @Length(min = 3 , max = 200 , message = "O campo Descrição deve ter entre 3 e 100 caracteres")
     private String descricao;
     
     @OneToMany(mappedBy = "categoria")

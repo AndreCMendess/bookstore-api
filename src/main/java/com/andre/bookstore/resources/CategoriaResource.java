@@ -3,6 +3,7 @@ package com.andre.bookstore.resources;
 import com.andre.bookstore.domain.Categoria;
 import com.andre.bookstore.dtos.CategoriaDTO;
 import com.andre.bookstore.service.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
@@ -39,7 +41,7 @@ public class CategoriaResource {
     }
 
     @PostMapping// Define que este metodo é uma requisição post (create).
-    public ResponseEntity<Categoria> create(@RequestBody Categoria obj){//Recebe um objeto categoria na forma de um request json
+    public ResponseEntity<Categoria> create(@Valid @RequestBody Categoria obj){//Recebe um objeto categoria na forma de um request json
            //Cria a categoria no banco de dados e atualiza a variavel obj com ela
            obj = service.create(obj);
            //Cria uma URI que aponta pro recurso criado , incluindo o id da categoria
@@ -51,7 +53,7 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/{id}")// Define que este metodo responde a requisições PUT na URL com um ID
-    public ResponseEntity<CategoriaDTO> update (@PathVariable Integer id,@RequestBody CategoriaDTO objDto){ // atualiza uma categoria com base no id e nos dados do objDto
+    public ResponseEntity<CategoriaDTO> update (@PathVariable Integer id,@Valid @RequestBody CategoriaDTO objDto){ // atualiza uma categoria com base no id e nos dados do objDto
 
         Categoria newObj = service.create(id,objDto);// recebe o obj atualizado pelo serviço
         return ResponseEntity.ok().body(new CategoriaDTO(newObj));// retorna a reposta http 200 com o corpo da resposta a categoria atualizada

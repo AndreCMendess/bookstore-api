@@ -4,6 +4,7 @@ package com.andre.bookstore.resources;
 import com.andre.bookstore.domain.Livro;
 import com.andre.bookstore.dtos.LivroDTO;
 import com.andre.bookstore.service.LivroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value ="/livros")
 public class LivroResource {
@@ -48,7 +50,7 @@ public class LivroResource {
 
     //Metodo que atualiza um livro escolhido por id
     @PutMapping(value = "/{id}")//Define que esse metodo responde a requisicoes HTTP do tipo Put e espera como valor um ID
-    public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro livro){//@PathVariable captura o ID da URL. @RequestBody captura os dados do livro no corpo da requisição
+    public ResponseEntity<Livro> update(@PathVariable Integer id, @Valid @RequestBody Livro livro){//@PathVariable captura o ID da URL. @RequestBody captura os dados do livro no corpo da requisição
         //Atualiaz o livro no banco de dados com base no ID e nos dados fornecidos no corpo da requisição
         Livro livroAtualizado = service.update(id,livro);
         //Retorna uma respota HTTP com o status 200() e o livro atualizado no corpo da resposta
@@ -58,7 +60,7 @@ public class LivroResource {
 
     // Metodo que atualiza parcialmente um livro pelo ID fornecido na URL
     @PatchMapping(value = "/{id}")// Responde a requisições do tipo Patch, com um ID na URL
-    public ResponseEntity<Livro> updatePatch(@PathVariable Integer id, @RequestBody Livro livro){//@PathVariable captura o ID da URL. @RequestBody recebe os dados do livro no corpo da requisição
+    public ResponseEntity<Livro> updatePatch(@PathVariable Integer id, @Valid @RequestBody Livro livro){//@PathVariable captura o ID da URL. @RequestBody recebe os dados do livro no corpo da requisição
         // Atualiza parcialmente o livro no banco de dados com base no ID e nos dados fornecidos no corpo da requisição
         Livro livroAtualizado = service.update(id,livro);
         // Retorna uma resposta HTTP com status 200 (OK) e o livro atualizado no corpo da resposta
@@ -68,7 +70,7 @@ public class LivroResource {
 
     // Metodo que cria um novo  livro e o salva no banco de dados
     @PostMapping  // Define que o metodo responde a requisições HTTP do tipo POST
-    public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0")  Integer id_cat , @RequestBody Livro livro ){//@RequestParam captura o ID da categoria da URL, com 0 como valor padrao. @RequestBody mapeia os dados do livro do corpo da requisição
+    public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0")  Integer id_cat ,@Valid @RequestBody Livro livro ){//@RequestParam captura o ID da categoria da URL, com 0 como valor padrao. @RequestBody mapeia os dados do livro do corpo da requisição
         //Cria um novo livro no banco de dados , associando-o a categoria  indicada e usando os dados enviados no corpo da requisição
         Livro novoLivro = service.create(id_cat,livro);
         // Gera a URI do novo livro criado com o ID gerado automaticamente

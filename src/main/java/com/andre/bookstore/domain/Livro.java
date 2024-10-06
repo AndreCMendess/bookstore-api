@@ -8,6 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -18,8 +21,17 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "O Titulo não pode ser vazio")
+    @Length(min = 3, max = 50 , message = "O titulo deve ter entre 3 e 50 caracteres")
     private String titulo;
+
+    @NotEmpty(message = "O NomeAutor não pode ser vazio")
+    @Length(min = 3, max = 50 , message = "O NomeAutor deve ter entre 3 e 50 caracteres")
     private String nomeAutor;
+
+    @NotEmpty(message = "O Texto não pode ser vazio")
+    @Length(min = 10, max = 2000000, message = "O  Texto deve ter entre 3 e 50 caracteres")
     private String texto;
 
     @JsonIgnore
